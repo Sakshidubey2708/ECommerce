@@ -42,7 +42,5 @@ public class EmailFetch extends AppCompatActivity {
             emails.setText(accountName);
         }
 
-
-
     }
 }

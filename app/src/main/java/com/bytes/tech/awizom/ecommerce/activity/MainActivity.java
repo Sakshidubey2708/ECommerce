@@ -44,14 +44,11 @@ public class MainActivity extends AppCompatActivity {
         GetAccountsName();
         //Converting account string array list into string array.
         StringArray = SampleArrayList.toArray(new String[SampleArrayList.size()]);
-
         //Setting up string array into array adapter.
         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_2, android.R.id.text1, StringArray);
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //Adding array adapter into listview.
                 listView.setAdapter(arrayAdapter);
 
@@ -66,9 +63,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             account = AccountManager.get(MainActivity.this).getAccounts();
         }
-        catch (SecurityException e) {
-
-        }
+        catch (SecurityException e) { }
 
         for (Account TempAccount : account) {
 
