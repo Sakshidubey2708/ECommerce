@@ -12,12 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.bytes.tech.awizom.ecommerce.R;
-
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
 import static android.Manifest.permission.GET_ACCOUNTS;
 import static android.Manifest.permission.READ_PHONE_STATE;
 

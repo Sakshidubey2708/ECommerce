@@ -1,17 +1,11 @@
 package com.bytes.tech.awizom.ecommerce.activity;
 
-import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.bytes.tech.awizom.ecommerce.R;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;

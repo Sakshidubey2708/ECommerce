@@ -1,8 +1,6 @@
 package com.bytes.tech.awizom.ecommerce.activity;
 
 import android.Manifest;
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -16,9 +14,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.bytes.tech.awizom.ecommerce.R;
-
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
