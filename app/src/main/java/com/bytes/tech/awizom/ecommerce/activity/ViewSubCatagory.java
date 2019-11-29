@@ -11,8 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import com.bytes.tech.awizom.ecommerce.R;
+import com.bytes.tech.awizom.ecommerce.adapter.MainCatagoryAdapter;
 import com.bytes.tech.awizom.ecommerce.adapter.SubCatagoryAdapter;
 import com.bytes.tech.awizom.ecommerce.configure.AppConfig;
+import com.bytes.tech.awizom.ecommerce.configure.HelperApi;
 import com.bytes.tech.awizom.ecommerce.models.CatagoriesModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -77,7 +79,26 @@ public class ViewSubCatagory  extends AppCompatActivity {
 
         try {
             mSwipeRefreshLayout.setRefreshing(true);
-            new GetAllGetMainCategoriesList().execute();
+            result = new HelperApi.GetAllSubCategoriesList().execute().get();
+            if (result.isEmpty()) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            } else {
+
+                if (result.isEmpty()) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                } else {
+                    /*   Toast.makeText(getApplicationContext(),result+"",Toast.LENGTH_LONG).show();*/
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<List<CatagoriesModel>>() {
+                    }.getType();
+                    catagoriesModels = new Gson().fromJson(result, listType);
+                    Log.d("Error", catagoriesModels.toString());
+                    SubCatagoryAdapter subCatagoryAdapter= new SubCatagoryAdapter(ViewSubCatagory.this, catagoriesModels);
+                    recyclerView.setAdapter(subCatagoryAdapter);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+
+            }
         } catch (Exception e) {
             mSwipeRefreshLayout.setRefreshing(false);
             e.printStackTrace();
@@ -86,46 +107,5 @@ public class ViewSubCatagory  extends AppCompatActivity {
     }
 
 
-    private class GetAllGetMainCategoriesList extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... params) {
-
-            String json = "";
-            try {
-                OkHttpClient client = new OkHttpClient();
-                Request.Builder builder = new Request.Builder();
-                builder.url(AppConfig.BASE_URL_API + "GetMainCategoriesList");
-                builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
-                builder.addHeader("Accept", "application/json");
-                okhttp3.Response response = client.newCall(builder.build()).execute();
-                if (response.isSuccessful()) {
-                    json = response.body().string();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return json;
-        }
-
-        protected void onPostExecute(String result) {
-
-            if (result.isEmpty()) {
-                mSwipeRefreshLayout.setRefreshing(false);
-            } else {
-                /*   Toast.makeText(getApplicationContext(),result+"",Toast.LENGTH_LONG).show();*/
-                Gson gson = new Gson();
-                Type listType = new TypeToken<List<CatagoriesModel>>() {
-                }.getType();
-                catagoriesModels = new Gson().fromJson(result, listType);
-                Log.d("Error", catagoriesModels.toString());
-                SubCatagoryAdapter subCatagoryAdapter= new SubCatagoryAdapter(ViewSubCatagory.this, catagoriesModels);
-                recyclerView.setAdapter(subCatagoryAdapter);
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-
-        }
-
-
-    }
 
 }

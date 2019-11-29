@@ -93,58 +93,8 @@ public class ViewMainCatagory extends AppCompatActivity {
 
         }
 
-//        try {
-//            mSwipeRefreshLayout.setRefreshing(true);
-//            new GetAllGetMainCategoriesList().execute();
-//        } catch (Exception e) {
-//            mSwipeRefreshLayout.setRefreshing(false);
-//            e.printStackTrace();
-//
-//        }
-    }
-
-
-    private class GetAllGetMainCategoriesList extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... params) {
-
-            String json = "";
-            try {
-                OkHttpClient client = new OkHttpClient();
-                Request.Builder builder = new Request.Builder();
-                builder.url(AppConfig.BASE_URL_API + "GetMainCategoriesList");
-                builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
-                builder.addHeader("Accept", "application/json");
-                okhttp3.Response response = client.newCall(builder.build()).execute();
-                if (response.isSuccessful()) {
-                    json = response.body().string();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.d("Error",e.getMessage());
-            }
-            return json;
-        }
-
-        protected void onPostExecute(String result) {
-
-            if (result.isEmpty()) {
-                mSwipeRefreshLayout.setRefreshing(false);
-            } else {
-                /*   Toast.makeText(getApplicationContext(),result+"",Toast.LENGTH_LONG).show();*/
-                Gson gson = new Gson();
-                Type listType = new TypeToken<List<CatagoriesModel>>() {
-                }.getType();
-                catagoriesModels = new Gson().fromJson(result, listType);
-                Log.d("Error", catagoriesModels.toString());
-                MainCatagoryAdapter mainCatagoryAdapter= new MainCatagoryAdapter(ViewMainCatagory.this, catagoriesModels);
-                recyclerView.setAdapter(mainCatagoryAdapter);
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-
-        }
-
 
     }
+
 
 }
