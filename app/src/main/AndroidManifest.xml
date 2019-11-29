@@ -27,12 +27,18 @@
         </activity>
 
         <activity android:name=".activity.ViewSubCatagory"   android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+        <activity android:name=".activity.ViewTypeCatagoriesActivity"   android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+
+        <activity android:name=".activity.BrandCatagoriesActivity"   android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activity.SignInActivity">
 
         </activity>
