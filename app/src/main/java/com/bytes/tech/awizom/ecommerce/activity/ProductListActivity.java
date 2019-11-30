@@ -10,20 +10,20 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import com.bytes.tech.awizom.ecommerce.R;
-import com.bytes.tech.awizom.ecommerce.adapter.BrandCatagoryAdapter;
+import com.bytes.tech.awizom.ecommerce.adapter.ProductListAdapter;
 import com.bytes.tech.awizom.ecommerce.adapter.TypeOfCatagoryAdapter;
 import com.bytes.tech.awizom.ecommerce.configure.HelperApi;
-import com.bytes.tech.awizom.ecommerce.models.CatagoriesModel;
+import com.bytes.tech.awizom.ecommerce.models.ProductModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class BrandCatagoriesActivity extends AppCompatActivity {
+public class ProductListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private String result = "";
-    List<CatagoriesModel> catagoriesModels;
+    List<ProductModel> productModel;
     TypeOfCatagoryAdapter subCatagoryAdapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -69,7 +69,7 @@ public class BrandCatagoriesActivity extends AppCompatActivity {
     private void getMainCatagories() {
         try {
             mSwipeRefreshLayout.setRefreshing(true);
-            result = new HelperApi.GetAllBrandsList().execute().get();
+            result = new HelperApi.GetAllProductList().execute().get();
             if (result.isEmpty()) {
                 mSwipeRefreshLayout.setRefreshing(false);
             } else {
@@ -78,11 +78,11 @@ public class BrandCatagoriesActivity extends AppCompatActivity {
                 } else {
                     /*   Toast.makeText(getApplicationContext(),result+"",Toast.LENGTH_LONG).show();*/
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<List<CatagoriesModel>>() {
+                    Type listType = new TypeToken<List<ProductModel>>() {
                     }.getType();
-                    catagoriesModels = new Gson().fromJson(result, listType);
-                    Log.d("Error", catagoriesModels.toString());
-                    BrandCatagoryAdapter subCatagoryAdapter= new BrandCatagoryAdapter(BrandCatagoriesActivity.this, catagoriesModels);
+                    productModel = new Gson().fromJson(result, listType);
+                    Log.d("Error", productModel.toString());
+                    ProductListAdapter subCatagoryAdapter= new ProductListAdapter(ProductListActivity.this, productModel);
                     recyclerView.setAdapter(subCatagoryAdapter);
                     mSwipeRefreshLayout.setRefreshing(false);
                 }
