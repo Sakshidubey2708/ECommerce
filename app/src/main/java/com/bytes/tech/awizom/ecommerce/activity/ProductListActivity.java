@@ -87,8 +87,8 @@ public class ProductListActivity extends AppCompatActivity {
                     mSwipeRefreshLayout.setRefreshing(false);
                 }
             }
-        } catch (Exception e) {
-            mSwipeRefreshLayout.setRefreshing(false);
+            } catch (Exception e) {
+                mSwipeRefreshLayout.setRefreshing(false);
             e.printStackTrace();
         }
     }
